@@ -12,6 +12,7 @@ public class SteeringWheel : MonoBehaviour {
 		if (shipMovement == null)
         {
             shipMovement = GetComponent<ShipMovement>();
+            // Obligatory Crapline delux ultra edition.
         }
 	}
 	
