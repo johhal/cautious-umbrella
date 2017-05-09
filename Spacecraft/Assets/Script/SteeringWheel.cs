@@ -11,7 +11,7 @@ public class SteeringWheel : ActivableObject  {
 	void Start () {
 		if (shipMovement == null)
         {
-            shipMovement = GetComponent<ShipMovement>();
+            shipMovement = GetComponent<Ship>().shipMovement;
             // Obligatory Crapline delux ultra edition.
         }
 	}
@@ -23,4 +23,9 @@ public class SteeringWheel : ActivableObject  {
             shipMovement.direction += (2 * System.Math.PI) / 360 * turn;
         }
 	}
+
+    public override bool Activate(float PlayerStats)
+    {
+        return false;
+    }
 }
