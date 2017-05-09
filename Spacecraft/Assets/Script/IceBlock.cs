@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class IceBlock : ActivableObject {
-    private int currentIceLevel;
-    private int recoveryRate;
-    private float labor;
-    private int pricePerActivation;
-    private float efficiency;
-    private int blockCost;
+    public int currentIceLevel;
+    public int recoveryRate;
+    public float labor;
+    public int pricePerActivation;
+    public float efficiency;
+    public int cubeCost;
 
     // Use this for initialization
     void Start ()//int currentIceLevel, int recoveryRate, int labor)
@@ -33,7 +33,7 @@ public class IceBlock : ActivableObject {
             labor += pricePerActivation * efficiency;
 
             // Kontrollera om vi har nått max, isf skapa ny isbit, å ge till spelare. 
-            if (labor >  blockCost)
+            if (labor >  cubeCost)
             {
                 //Skapa isbit
                 Transform IceCube = null;
