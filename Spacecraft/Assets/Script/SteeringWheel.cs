@@ -20,12 +20,14 @@ public class SteeringWheel : ActivableObject  {
 	void FixedUpdate () {
 		if (shipMovement != null)
         {
-            shipMovement.direction += (2 * System.Math.PI) / 360 * turn;
+            //shipMovement.direction += (2 * System.Math.PI) / 360 * turn;
+
         }
 	}
 
-    public override bool Activate(float PlayerStats)
+    public override bool Activate(PlayerStats playerStats)
     {
+
         return false;
     }
 }
