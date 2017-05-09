@@ -17,8 +17,9 @@ public class PlayerMovement : MonoBehaviour
 	public float leftInputX = 0;
 	public int joystickNumber = 2;
 	public float rightTrigger = 0;
-
-	void Start ()
+    public bool button_a = false;
+    public bool button_b = false;
+    void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D> ();
 	}
@@ -26,9 +27,11 @@ public class PlayerMovement : MonoBehaviour
 	void FixedUpdate ()
 	{
 		string joystickString = joystickNumber.ToString ();
-		//Get input
+        //Get input
 
-		rightTrigger = -Input.GetAxis ("RightTrigger_P" + joystickString);
+        button_a = Input.GetButton("A_P" + joystickString);
+        button_b = Input.GetButton("B_P" + joystickString);
+        rightTrigger = -Input.GetAxis ("RightTrigger_P" + joystickString);
 
 
 		currentSpeed = movementSpeed + (runningSpeed - movementSpeed) * rightTrigger;
@@ -49,9 +52,10 @@ public class PlayerMovement : MonoBehaviour
 		rightInputX = -Input.GetAxis ("RightJoystickX_P" + joystickString);
 		rightInputY = -Input.GetAxis ("RightJoystickY_P" + joystickString);
 
+       
 
-		//Check if character should rotate
-		if ((rightInputY != 0) || (rightInputX != 0)) {
+        //Check if character should rotate
+        if ((rightInputY != 0) || (rightInputX != 0)) {
 			//if ((Input.GetAxis ("RightJoystickX") != 0) && (Input.GetAxis ("RightJoystickY") != 0)) {
 			rotation = (180 / Mathf.PI) * Mathf.Atan2 (rightInputX, rightInputY);
 			//}
