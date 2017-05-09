@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Activateable : MonoBehaviour {
+public class ActivableObject : MonoBehaviour {
 
     //Overide this to make the object activable for the player
     public bool Activate(float PlayerStats)

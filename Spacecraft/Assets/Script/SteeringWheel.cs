@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SteeringWheel : MonoBehaviour {
+public class SteeringWheel : ActivableObject  {
 
     public ShipMovement shipMovement;
 
