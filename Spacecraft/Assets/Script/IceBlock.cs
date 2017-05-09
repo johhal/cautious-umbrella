@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceBlock : MonoBehaviour {
+public class IceBlock : ActivableObject {
     private int currentIceLevel;
     private int recoveryRate;
     private float labor;
@@ -36,6 +36,8 @@ public class IceBlock : MonoBehaviour {
             if (labor >  blockCost)
             {
                 //Skapa isbit
+                Transform IceCube = null;
+                Instantiate(IceCube, new Vector3(0, 0, 0), Quaternion.identity);
                 //Ge isbit till spelare? Alternativt lägg isbit nånstans?
                 //Räkna ut ny labor
                 labor -= pricePerActivation;
