@@ -7,7 +7,7 @@ public class IceBlock : MonoBehaviour {
     private int recoveryRate;
     private float labor;
     private int pricePerActivation;
-    private float efficieny;
+    private float efficiency;
     private int blockCost;
 
     // Use this for initialization
@@ -21,13 +21,13 @@ public class IceBlock : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        currentIceLevel += recovery_rate;
+        currentIceLevel += recoveryRate;
 	}
 
     private void Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
-        if (playerStats.Stamina > pricePerActivation)
+        if (playerStats.Current_Stamina > pricePerActivation)
         {
             // SKicka in labor in i isen. 
             labor += pricePerActivation * efficiency;

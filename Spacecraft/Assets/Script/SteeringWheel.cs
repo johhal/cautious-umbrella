@@ -17,14 +17,6 @@ public class SteeringWheel : ActivableObject  {
         }
 	}
 	
-	// Update is called once per fixed frame
-	void FixedUpdate () {
-        if (ship != null)
-        {
-            transform.localEulerAngles = new Vector3(0, 0, (float) ship.shipMovement.direction);
-        }
-	}
-
     public override bool Activate(PlayerStats playerStats)
     {
         //Check if the steering wheel is connected to a boat...
@@ -36,6 +28,7 @@ public class SteeringWheel : ActivableObject  {
         {
             playerStats.Current_Stamina -= labour;
             ship.direction += (2 * System.Math.PI) / 360 * turn;
+            transform.Rotate(Vector3.forward * 2);
         }
         return false;
     }
