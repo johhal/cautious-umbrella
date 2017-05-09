@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceBlock// : MonoBehaviour {
+public class IceBlock : MonoBehaviour {
     private int currentIceLevel;
     private int recoveryRate;
     private float labor;
@@ -11,12 +11,12 @@ public class IceBlock// : MonoBehaviour {
     private int blockCost;
 
     // Use this for initialization
-    //void Start ()//int currentIceLevel, int recoveryRate, int labor)
-    //{
+    void Start ()//int currentIceLevel, int recoveryRate, int labor)
+    {
         //this.currentIceLevel = currentIceLevel;
         //this.recoveryRate = recoveryRate;
         //this.labor = labor;
-	//}
+	}
 	
 	// Update is called once per frame
 	void Update ()
