@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IceBlock : MonoBehaviour {
-    private int currentIceLevel;
-    private int recoveryRate;
-    private float labor;
-    private int pricePerActivation;
-    private float efficiency;
-    private int blockCost;
+
+public class IceBlock : ActivableObject {
+    public int currentIceLevel;
+    public int recoveryRate;
+    public float labor;
+    public int pricePerActivation;
+    public float efficiency;
+    public int cubeCost;
 
     // Use this for initialization
     void Start ()//int currentIceLevel, int recoveryRate, int labor)
@@ -24,7 +25,7 @@ public class IceBlock : MonoBehaviour {
         currentIceLevel += recoveryRate;
 	}
 
-    private void Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
+    public override bool Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
         if (playerStats.Current_Stamina > pricePerActivation)
@@ -33,14 +34,20 @@ public class IceBlock : MonoBehaviour {
             labor += pricePerActivation * efficiency;
 
             // Kontrollera om vi har nått max, isf skapa ny isbit, å ge till spelare. 
-            if (labor >  blockCost)
+            if (labor >  cubeCost)
             {
                 //Skapa isbit
+                GameObject iceCube = new GameObject();
+                GameObject.Instantiate(iceCube, transform.position, transform.rotation); //Lägger till...nånting...
+                //GameObject instance = Instantiate(Resources.Load("IceCube"), transform) as GameObject;
+
                 //Ge isbit till spelare? Alternativt lägg isbit nånstans?
                 //Räkna ut ny labor
                 labor -= pricePerActivation;
             }
+            return true;
         }
+        return false;
         // Annars, chilla (och uppdatera bar)
     }
 }
