@@ -10,6 +10,7 @@ public class IceBlock : ActivableObject {
     public int pricePerActivation;
     public float efficiency;
     public int cubeCost;
+    public GameObject iceCube;
 
     // Use this for initialization
     void Start ()//int currentIceLevel, int recoveryRate, int labor)
@@ -17,7 +18,9 @@ public class IceBlock : ActivableObject {
         //this.currentIceLevel = currentIceLevel;
         //this.recoveryRate = recoveryRate;
         //this.labor = labor;
-	}
+        iceCube = Resources.Load("Prefabs/IceCube") as GameObject;
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -37,13 +40,17 @@ public class IceBlock : ActivableObject {
             if (labor >  cubeCost)
             {
                 //Skapa isbit
-                GameObject iceCube = new GameObject();
-                GameObject.Instantiate(iceCube, transform.position, transform.rotation); //Lägger till...nånting...
+                //GameObject iceCube = new GameObject();
+                    //Lägger till...nånting...
                 //GameObject instance = Instantiate(Resources.Load("IceCube"), transform) as GameObject;
-
+                if(iceCube != null)
+                {
+                    GameObject instance = Instantiate(iceCube) as GameObject;
+                    instance.transform.position = transform.position;
+                }
                 //Ge isbit till spelare? Alternativt lägg isbit nånstans?
                 //Räkna ut ny labor
-                labor -= pricePerActivation;
+                labor -= cubeCost;
             }
             return true;
         }
