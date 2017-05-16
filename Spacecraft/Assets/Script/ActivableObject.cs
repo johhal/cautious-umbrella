@@ -3,10 +3,10 @@
 public class ActivableObject : MonoBehaviour {
 
     //Overide this to make the object activable for the player
-    //Return true if the action was completed without errors.
-    public virtual bool Activate(PlayerStats playerStats)
+    //Return delay before this object can be active again
+    public virtual float Activate(PlayerStats playerStats)
     {
-        return false;
+        return -1;
     }
     //Overide this to make the object know  it is active
     //Return true if focus was gained without errors.

@@ -25,7 +25,7 @@ public class IceBlock : ActivableObject {
         currentIceLevel += recoveryRate;
 	}
 
-    public override bool Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
+    public override float Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
         if (playerStats.Current_Stamina > pricePerActivation)
@@ -45,9 +45,9 @@ public class IceBlock : ActivableObject {
                 //Räkna ut ny labor
                 labor -= pricePerActivation;
             }
-            return true;
+            return 0.1f;
         }
-        return false;
+        return 0.1f;
         // Annars, chilla (och uppdatera bar)
     }
 }

@@ -17,12 +17,12 @@ public class SteeringWheel : ActivableObject  {
         }
 	}
 	
-    public override bool Activate(PlayerStats playerStats)
+    public override float Activate(PlayerStats playerStats)
     {
         //Check if the steering wheel is connected to a boat...
         if (ship == null)
         {
-            return false;
+            return 0.1f;
         }
         if (playerStats.Current_Stamina >= labour)
         {
@@ -30,6 +30,6 @@ public class SteeringWheel : ActivableObject  {
             ship.direction += (2 * System.Math.PI) / 360 * turn;
             transform.Rotate(Vector3.forward * 2);
         }
-        return false;
+        return 0.1f;
     }
 }
