@@ -11,6 +11,7 @@ public class IceBlock : ActivableObject {
     public float efficiency;
     public int cubeCost;
     public GameObject iceCube;
+    public SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start ()//int currentIceLevel, int recoveryRate, int labor)
@@ -19,7 +20,7 @@ public class IceBlock : ActivableObject {
         //this.recoveryRate = recoveryRate;
         //this.labor = labor;
         iceCube = Resources.Load("Prefabs/IceCube") as GameObject;
-
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 	
 	// Update is called once per frame
@@ -28,7 +29,27 @@ public class IceBlock : ActivableObject {
         currentIceLevel += recoveryRate;
 	}
 
-    public override float Activate(PlayerStats playerStats)  // Skicka med ett mäniskoobjekt. 
+    public override bool FocusGained()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.blue;
+            return true;
+        }
+        return base.FocusGained();
+    }
+
+    public override bool FocusLost()
+    {
+        if (spriteRenderer != null)
+        {
+            spriteRenderer.color = Color.red;
+            return true;
+        }
+        return base.FocusLost();
+    }
+
+    public override float Activate(PlayerStats playerStats, GameObject carryingPosition)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
         if (playerStats.Current_Stamina > pricePerActivation)

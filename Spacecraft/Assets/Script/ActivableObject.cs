@@ -4,7 +4,7 @@ public class ActivableObject : MonoBehaviour {
 
     //Overide this to make the object activable for the player
     //Return delay before this object can be active again
-    public virtual float Activate(PlayerStats playerStats)
+    public virtual float Activate(PlayerStats playerStats, GameObject carryingPosition)
     {
         return -1;
     }

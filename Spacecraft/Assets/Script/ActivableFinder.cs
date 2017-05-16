@@ -13,8 +13,18 @@ public class ActivableFinder : MonoBehaviour {
     public PlayerMovement playerMovement;
     //Access to the player stats
     public PlayerStatsManager playerStatsManager;
-
+    //Flag to indicate if Coroutine is running
+    public bool isActiveCoroutineStarted;
     // Update is called once per frame
+
+    //Carrying position for active player
+    public GameObject carryingPosition;
+
+    private void Start()
+    {
+        isActiveCoroutineStarted = false;
+    }
+
     void Update() {
         //Find nearest ActivableObject within range.
         FindObject();
@@ -61,22 +71,23 @@ public class ActivableFinder : MonoBehaviour {
     {
         if (active != null)
         {
-            //if (playerMovement.button_a)
-            //{
-            //    active.Activate(playerStatsManager.playerStats);
-            //}
-            StartCoroutine(ActiveCoRoutine(playerMovement.button_a, playerStatsManager.playerStats));
+            if (isActiveCoroutineStarted != true)
+            {
+                StartCoroutine(ActiveCoRoutine(playerMovement, playerStatsManager.playerStats, carryingPosition));
+            }
         }
     }
 
-    public IEnumerator ActiveCoRoutine(bool button_a, PlayerStats playerStats)
+    public IEnumerator ActiveCoRoutine(PlayerMovement playerMovement, PlayerStats playerStats, GameObject carryingPosition)
     {
+        isActiveCoroutineStarted = true;
         float delay;
-        while (button_a)
+        while (playerMovement.button_a)
         {
-            delay = active.Activate(playerStatsManager.playerStats);
+            delay = active.Activate(playerStatsManager.playerStats, carryingPosition);
             yield return new WaitForSeconds(delay);
         }
+        isActiveCoroutineStarted = false;
     }
 
     ActivableObject getCloseActivable()

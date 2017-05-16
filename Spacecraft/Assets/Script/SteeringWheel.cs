@@ -17,7 +17,7 @@ public class SteeringWheel : ActivableObject  {
         }
 	}
 	
-    public override float Activate(PlayerStats playerStats)
+    public override float Activate(PlayerStats playerStats, GameObject carryingPostition)
     {
         //Check if the steering wheel is connected to a boat...
         if (ship == null)
