@@ -61,10 +61,21 @@ public class ActivableFinder : MonoBehaviour {
     {
         if (active != null)
         {
-            if (playerMovement.button_a)
-            {
-                active.Activate(playerStatsManager.playerStats);
-            }
+            //if (playerMovement.button_a)
+            //{
+            //    active.Activate(playerStatsManager.playerStats);
+            //}
+            StartCoroutine(ActiveCoRoutine(playerMovement.button_a, playerStatsManager.playerStats));
+        }
+    }
+
+    public IEnumerator ActiveCoRoutine(bool button_a, PlayerStats playerStats)
+    {
+        float delay;
+        while (button_a)
+        {
+            delay = active.Activate(playerStatsManager.playerStats);
+            yield return new WaitForSeconds(delay);
         }
     }
 

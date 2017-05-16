@@ -11,10 +11,12 @@ public class PlayerStatsManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         playerStats = new PlayerStats(Max_Stamina, Current_Stamina, Stamina_Regen);
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        InvokeRepeating("Regenerate", 1.0f, 0.1f);
+    }
+
+    //Used to regenerate player stamina
+    void Regenerate()
+    {
         playerStats.Regenerate_Stamina();
     }
 }
