@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 
-public class ActivableObject : MonoBehaviour {
+public abstract class ActivableObject : MonoBehaviour {
 
     //Overide this to make the object activable for the player
     //Return delay before this object can be active again
-    public virtual float Activate(PlayerStats playerStats, GameObject carryingPosition)
+    public virtual float Activate(PlayerManager playerManager)
     {
         return -1;
     }

@@ -49,10 +49,10 @@ public class IceBlock : ActivableObject {
         return base.FocusLost();
     }
 
-    public override float Activate(PlayerStats playerStats, GameObject carryingPosition)  // Skicka med ett mäniskoobjekt. 
+    public override float Activate(PlayerManager playerManager)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
-        if (playerStats.Current_Stamina > pricePerActivation)
+        if (playerManager.playerStatsManager.playerStats.Current_Stamina > pricePerActivation)
         {
             // SKicka in labor in i isen. 
             labor += pricePerActivation * efficiency;
@@ -61,9 +61,6 @@ public class IceBlock : ActivableObject {
             if (labor >  cubeCost)
             {
                 //Skapa isbit
-                //GameObject iceCube = new GameObject();
-                    //Lägger till...nånting...
-                //GameObject instance = Instantiate(Resources.Load("IceCube"), transform) as GameObject;
                 if(iceCube != null)
                 {
                     GameObject instance = Instantiate(iceCube) as GameObject;
