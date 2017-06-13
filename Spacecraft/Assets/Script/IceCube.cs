@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 
 public class IceCube : CarriableObject
@@ -7,12 +6,15 @@ public class IceCube : CarriableObject
     public SpriteRenderer spriteRenderer;
     public float currentIceLevel = 100;
     public float decreaseRate = 1;
+    public Rigidbody2D rigidBody;
 
     public GameObject carryingPlayer;
-    // Use this for initialization
+    
+    //Stores the mass when the object is picked up
     void Start()//int currentIceLevel, int recoveryRate, int labor)
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        rigidBody = GetComponent<Rigidbody2D>();
         InvokeRepeating("DecreaseIceLevel", 1.0f, 0.1f);
     }
 
@@ -22,7 +24,7 @@ public class IceCube : CarriableObject
         currentIceLevel -= decreaseRate;
         if(currentIceLevel < 0)
         {
-            Destroy(this);
+            //Destroy(gameObject);
         }
     }
 
@@ -56,33 +58,52 @@ public class IceCube : CarriableObject
 
     public override float Activate(PlayerManager playerManager)  // Skicka med ett mäniskoobjekt. 
     {
-        Debug.Log("IceCube - Activate");
-       if (playerManager.carryManager.IsCarrying())
+        Debug.Log("IceCube Activate");
+        if (playerManager.carryManager.IsCarrying())
         {
-            Debug.Log("IceCube - Carrymanager is carrying..");
-            return 0.1f;
+            Debug.Log("IceCube is Carrying");
+            if (playerManager.carryManager.DropMe(this))
+            {
+                return 1;
+            }
+            else
+            {
+                return 0.1f;
+            }
         }
 
        //Check if the carrymanager could pick me up...
         if (playerManager.carryManager.PickMeUp(this))
         {
-            Debug.Log("IceCube - CarryManager Picked me up");
+            Debug.Log("Was picked up.");
             return 1;
         }
         else
         {
-            Debug.Log("IceCube - CarryManager did not pick me up");
             return 0.1f;
         }
                
     }
     public override bool pickUp(PlayerManager playerManager)
     {
+        if (rigidBody != null)
+        {
+            rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Discrete;
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.angularVelocity = 0f;
+            //rigidBody.
+        }
         return true;
     }
     
     public override bool drop()
     {
-        return false;
+        if (rigidBody != null)
+        {
+            rigidBody.collisionDetectionMode = CollisionDetectionMode2D.Continuous ;
+            rigidBody.velocity = Vector2.zero;
+            rigidBody.angularVelocity = 0f;
+        }
+        return true;
     }
 }

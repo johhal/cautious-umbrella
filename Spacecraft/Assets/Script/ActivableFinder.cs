@@ -13,6 +13,8 @@ public class ActivableFinder : MonoBehaviour {
     public bool isActiveCoroutineStarted;
     //The manager of the player this activable finder is bound to
     public PlayerManager playerManager;
+    // Minimum detection angle
+    public float minDetectionAngle = 45;
     private void Start()
     {
         isActiveCoroutineStarted = false;
@@ -29,7 +31,15 @@ public class ActivableFinder : MonoBehaviour {
 
     private void FindObject()
     {
-        active = getCloseActivable();
+        if (playerManager.carryManager.IsCarrying())
+        {
+            active = playerManager.carryManager.currentObject;
+        }
+        else
+        {
+            active = getCloseActivable();
+        }
+        
     }
 
     private void Focus()
@@ -51,7 +61,7 @@ public class ActivableFinder : MonoBehaviour {
             oldActive = active;
         }else
         {
-            if (oldActive.Equals(active))
+            if (!oldActive.Equals(active))
             {
                 oldActive.FocusLost();
                 active.FocusGained();
@@ -92,20 +102,25 @@ public class ActivableFinder : MonoBehaviour {
 
         foreach (ActivableObject activable in activables)
         {
-            float dist = Vector3.Distance(activable.transform.position, transform.position);
-            if (closest == null)
+            //Debug.Log(Vector3.Angle(transform.up, activable.transform.position - transform.position).ToString());
+            if (Vector3.Angle(transform.up, activable.transform.position - transform.position) < minDetectionAngle)
             {
-                closest = activable;
-                closestDistance = dist;
-             }
-            else
-            {
-                if (dist < closestDistance)
+                float dist = Vector3.Distance(activable.transform.position, transform.position);
+                if (closest == null)
                 {
                     closest = activable;
                     closestDistance = dist;
                 }
+                else
+                {
+                    if (dist < closestDistance)
+                    {
+                        closest = activable;
+                        closestDistance = dist;
+                    }
+                }
             }
+
         }
 
         if (closestDistance <= MaxDistance)

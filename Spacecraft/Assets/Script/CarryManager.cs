@@ -4,7 +4,7 @@ using UnityEngine;
 public class CarryManager : MonoBehaviour {
 
     //The objejct currently being carried. Null if nothing.
-    CarriableObject currentObject;
+    public CarriableObject currentObject;
 
     //The playermanager belonging to the player
     public PlayerManager playerManager;
@@ -26,6 +26,34 @@ public class CarryManager : MonoBehaviour {
     public bool IsCarrying()
     {
         return currentObject != null;
+    }
+
+    //Drop the carriableObject if we are carrying it.
+    public bool DropMe(CarriableObject carriedObject)
+    {
+        Debug.Log("CarryManager DropMe");
+        if (carriedObject == null)
+        {
+            Debug.Log("CarryManager CarriedObject is null");
+            return false;
+        }
+
+        if (IsCarrying())
+        {
+            Debug.Log("CarryManager IsCarrying");
+            if (currentObject == carriedObject)
+            {
+                Debug.Log("CarryManager currentObjejct = carriedObjejct");
+                if (currentObject.drop())
+                {
+                    Debug.Log("CarryManager dropped.");
+                    currentObject = null;
+                    return true;
+                }                
+            }
+        }
+        Debug.Log("CarryManager Failed and return false.");
+        return false;
     }
 
     //Pick up the CarriableObject if it is valid and you are not carrying anything
