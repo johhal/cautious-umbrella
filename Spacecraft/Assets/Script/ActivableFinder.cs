@@ -15,9 +15,12 @@ public class ActivableFinder : MonoBehaviour {
     public PlayerManager playerManager;
     // Minimum detection angle
     public float minDetectionAngle = 45;
+    //List of all activables inside the "cone of reach"
+    public List<ActivableObject> activables;
     private void Start()
     {
         isActiveCoroutineStarted = false;
+        activables = new List<ActivableObject>();
     }
 
     void Update() {
@@ -27,6 +30,25 @@ public class ActivableFinder : MonoBehaviour {
         Focus();
         //Activate the object if the user is pressing button_a
         Activate();
+    }
+
+    void OnTriggerEnter2D(Collider2D coll)
+    {
+        Debug.Log("Collision Enter");
+        ActivableObject temp = coll.gameObject.GetComponent<ActivableObject>();
+        if (temp != null)
+        {
+            activables.Add(temp);
+        }
+    }
+    void OnCollisionExit2D(Collision2D coll)
+    {
+        Debug.Log("Collision Leave");
+        ActivableObject temp = coll.gameObject.GetComponent<ActivableObject>();
+        if (temp != null)
+        {
+            activables.Remove(temp);
+        }
     }
 
     private void FindObject()
@@ -96,15 +118,16 @@ public class ActivableFinder : MonoBehaviour {
 
     ActivableObject getCloseActivable()
     {
-        ActivableObject closest = null;
+
+         ActivableObject closest = null;
         float closestDistance=float.MaxValue;
-        ActivableObject[] activables = GameObject.FindObjectsOfType(typeof(ActivableObject)) as ActivableObject[];
+        //ActivableObject[] activables = GameObject.FindObjectsOfType(typeof(ActivableObject)) as ActivableObject[];
 
         foreach (ActivableObject activable in activables)
         {
             //Debug.Log(Vector3.Angle(transform.up, activable.transform.position - transform.position).ToString());
-            if (Vector3.Angle(transform.up, activable.transform.position - transform.position) < minDetectionAngle)
-            {
+            //if (Vector3.Angle(transform.up, activable.transform.position - transform.position) < minDetectionAngle)
+            //{
                 float dist = Vector3.Distance(activable.transform.position, transform.position);
                 if (closest == null)
                 {
@@ -119,7 +142,7 @@ public class ActivableFinder : MonoBehaviour {
                         closestDistance = dist;
                     }
                 }
-            }
+            //}
 
         }
 
