@@ -2,7 +2,9 @@
 
 public abstract class ActivableObject : MonoBehaviour {
 
-    //Overide this to make the object activable for the player
+    //Indicates if the player will remain frozen while working on this object
+    public bool FreezePlayer = false;
+        //Overide this to make the object activable for the player
     //Return delay before this object can be active again
     public virtual float Activate(PlayerManager playerManager)
     {

@@ -6,8 +6,8 @@ using UnityEngine;
 public class IceBlock : ActivableObject {
     public int currentIceLevel;
     public int recoveryRate;
-    public float labor;
-    public int pricePerActivation;
+    public float totalLabor;
+    public int labor;
     public float efficiency;
     public int cubeCost;
     public GameObject iceCube;
@@ -52,13 +52,15 @@ public class IceBlock : ActivableObject {
     public override float Activate(PlayerManager playerManager)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
-        if (playerManager.playerStatsManager.playerStats.Current_Stamina > pricePerActivation)
+        if (playerManager.playerStatsManager.Current_Stamina > labor)
         {
+            //Remove used stamina
+            playerManager.playerStatsManager.Current_Stamina -= labor;
             // SKicka in labor in i isen. 
-            labor += pricePerActivation * efficiency;
+            totalLabor += labor * efficiency;
 
             // Kontrollera om vi har nått max, isf skapa ny isbit, å ge till spelare. 
-            if (labor >  cubeCost)
+            if (totalLabor >  cubeCost)
             {
                 //Skapa isbit
                 if(iceCube != null)
@@ -68,7 +70,7 @@ public class IceBlock : ActivableObject {
                 }
                 //Ge isbit till spelare? Alternativt lägg isbit nånstans?
                 //Räkna ut ny labor
-                labor -= cubeCost;
+                totalLabor -= cubeCost;
             }
             return 0.1f;
         }

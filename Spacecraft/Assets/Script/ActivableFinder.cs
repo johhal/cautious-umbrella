@@ -38,15 +38,18 @@ public class ActivableFinder : MonoBehaviour {
         ActivableObject temp = coll.gameObject.GetComponent<ActivableObject>();
         if (temp != null)
         {
+            Debug.Log("Collision Enter2");
             activables.Add(temp);
         }
     }
-    void OnCollisionExit2D(Collision2D coll)
+
+    void OnTriggerExit2D(Collider2D coll)
     {
         Debug.Log("Collision Leave");
         ActivableObject temp = coll.gameObject.GetComponent<ActivableObject>();
         if (temp != null)
         {
+            Debug.Log("Collision Leave2 ");
             activables.Remove(temp);
         }
     }
@@ -107,13 +110,22 @@ public class ActivableFinder : MonoBehaviour {
     {
         
         isActiveCoroutineStarted = true;
+        if (active.FreezePlayer)
+        {
+            playerManager.playerMovement.MovementEnabled = false;
+        }
+
         float delay;
         while (playerManager.playerMovement.button_a)
         {
-            delay = active.Activate(playerManager);
-            yield return new WaitForSeconds(delay);
+            if (active != null)
+            {
+                delay = active.Activate(playerManager);
+                yield return new WaitForSeconds(delay);
+            }            
         }
         isActiveCoroutineStarted = false;
+        playerManager.playerMovement.MovementEnabled = true;
     }
 
     ActivableObject getCloseActivable()

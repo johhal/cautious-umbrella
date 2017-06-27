@@ -5,18 +5,20 @@ using UnityEngine;
 public class PlayerStatsManager : MonoBehaviour {
     public float Max_Stamina = 100;
     public float Current_Stamina = 100;
-    public float Stamina_Regen = 1;
+    public float Stamina_Regen = 5;
 
-    public PlayerStats playerStats;
-	// Use this for initialization
-	void Start () {
-        playerStats = new PlayerStats(Max_Stamina, Current_Stamina, Stamina_Regen);
-        InvokeRepeating("Regenerate", 1.0f, 0.1f);
+   private void Update()
+    {
+        Regenerate();
     }
 
     //Used to regenerate player stamina
     void Regenerate()
     {
-        playerStats.Regenerate_Stamina();
+        Current_Stamina += Stamina_Regen * Time.deltaTime;
+        if (Current_Stamina > Max_Stamina)
+        {
+            Current_Stamina = Max_Stamina;
+        }
     }
 }

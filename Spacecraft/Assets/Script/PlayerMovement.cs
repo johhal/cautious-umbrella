@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool MovementEnabled = true;
 	private Vector3 movementVector;
 	private CharacterController characterController;
 	private Rigidbody2D rigidbody2d;
@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
 	public float rightTrigger = 0;
     public bool button_a = false;
     public bool button_b = false;
+
     void Start ()
 	{
 		rigidbody2d = GetComponent<Rigidbody2D> ();
@@ -37,12 +38,17 @@ public class PlayerMovement : MonoBehaviour
 		currentSpeed = movementSpeed + (runningSpeed - movementSpeed) * rightTrigger;
 
 
-		leftInputX = Input.GetAxis ("LeftJoystickX_P" + joystickString) * currentSpeed;
-		leftInputY = -Input.GetAxis ("LeftJoystickY_P" + joystickString) * currentSpeed;
-		if ((leftInputX != 0) || (leftInputY != 0)) {
-			speed = new Vector2 (leftInputX, leftInputY);
-			rigidbody2d.MovePosition (rigidbody2d.position + speed * Time.deltaTime);
-		}
+		leftInputX = Input.GetAxis ("LeftJoystickX_P" + joystickString);
+		leftInputY = -Input.GetAxis ("LeftJoystickY_P" + joystickString);
+
+        if (MovementEnabled)
+        {
+            if ((leftInputX != 0) || (leftInputY != 0))
+            {
+                speed = new Vector2(leftInputX * currentSpeed, leftInputY * currentSpeed);
+                rigidbody2d.MovePosition(rigidbody2d.position + speed * Time.deltaTime);
+            }
+        }
 	}
 
 	void Update ()
@@ -53,18 +59,19 @@ public class PlayerMovement : MonoBehaviour
 		rightInputY = -Input.GetAxis ("RightJoystickY_P" + joystickString);
 
        
-
-        //Check if character should rotate
-        if ((rightInputY != 0) || (rightInputX != 0)) {
-			//if ((Input.GetAxis ("RightJoystickX") != 0) && (Input.GetAxis ("RightJoystickY") != 0)) {
-			rotation = (180 / Mathf.PI) * Mathf.Atan2 (rightInputX, rightInputY);
-			//}
-			transform.localEulerAngles = new Vector3 (0, 0, rotation);
-		}
+        if (MovementEnabled)
+        {
+            //Check if character should rotate
+            if ((rightInputY != 0) || (rightInputX != 0))
+            {
+                //if ((Input.GetAxis ("RightJoystickX") != 0) && (Input.GetAxis ("RightJoystickY") != 0)) {
+                rotation = (180 / Mathf.PI) * Mathf.Atan2(rightInputX, rightInputY);
+                //}
+                transform.localEulerAngles = new Vector3(0, 0, rotation);
+            }
+        }    
 
 		//characterController.Move (movementVector * Time.deltaTime);
 
 	}
-
-
-}
+ }
