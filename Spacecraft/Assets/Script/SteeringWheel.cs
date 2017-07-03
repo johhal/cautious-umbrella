@@ -14,8 +14,8 @@ public class SteeringWheel : ActivableObject  {
     // Use this for initialization
     void Start () {
         FreezePlayer = true;
-        spriteRenderer = transform.FindChild("SteeringWheelWheel").GetComponent<SpriteRenderer>();
-        rigidBody = transform.FindChild("SteeringWheelWheel").GetComponent<Rigidbody2D>();
+        spriteRenderer = transform.Find("SteeringWheelWheel").GetComponent<SpriteRenderer>();
+        rigidBody = transform.Find("SteeringWheelWheel").GetComponent<Rigidbody2D>();
         if (spriteRenderer == null)
         {
             Debug.Log("Spriterenderer is null.");

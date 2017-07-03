@@ -1,0 +1,188 @@
+fileFormatVersion: 2
+guid: df7ff8ee895c3964c86e978d9b6e1a79
+timeCreated: 1499018931
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Karaktar_nr_1_flatt_2
+    21300002: Karaktar_nr_1_flatt_3
+    21300004: Character_nr_1_L_Fott
+    21300006: Character_nr_1_R-Fott
+    21300008: Character_nr_1_L_Hand
+    21300010: Character_nr_1_Boddy
+    21300012: Character_nr_1_R_Hand
+    21300014: Character_nr_1_Head
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Karaktar_nr_1_flatt_2
+      rect:
+        serializedVersion: 2
+        x: 982
+        y: 1435
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Karaktar_nr_1_flatt_3
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 1552
+        width: 102
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_L_Fott
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 1240
+        width: 202
+        height: 191
+      alignment: 9
+      pivot: {x: 0.7665532, y: 0.4154289}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_R-Fott
+      rect:
+        serializedVersion: 2
+        x: 944
+        y: 1240
+        width: 202
+        height: 190
+      alignment: 9
+      pivot: {x: 0.22678338, y: 0.4291536}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_L_Hand
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 1024
+        width: 182
+        height: 200
+      alignment: 9
+      pivot: {x: 0.7440717, y: 0.21059021}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_Boddy
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 728
+        width: 685
+        height: 352
+      alignment: 9
+      pivot: {x: 0.51768595, y: 0.3126179}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_R_Hand
+      rect:
+        serializedVersion: 2
+        x: 1279
+        y: 1025
+        width: 183
+        height: 199
+      alignment: 9
+      pivot: {x: 0.2719733, y: 0.20913589}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Character_nr_1_Head
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 376
+        width: 308
+        height: 320
+      alignment: 9
+      pivot: {x: 0.49563006, y: 0.36539078}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
