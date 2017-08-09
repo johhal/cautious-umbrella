@@ -55,7 +55,7 @@ public class Ship : MonoBehaviour {
         direction += (rotation * stear_efficiency) * Time.deltaTime;
         
         //Decrease rotation. If rotation < min_rotation set it to zero
-        if (rotation < MinMovementValue)
+        if (Mathf.Abs((float) rotation) < MinMovementValue)
         {
             rotation = 0;
         }
@@ -81,6 +81,8 @@ public class Ship : MonoBehaviour {
     //Used to change the rotation of the rudder.
     public void Steer(double change_in_rotation)
     {
+        Debug.Log("Steer, change_in_rotation: " + change_in_rotation);
+        //Debug.Log("Steer, max_rotation: " + max_rotation);
         rotation += change_in_rotation;
         if (rotation > max_rotation)
         {
@@ -90,6 +92,7 @@ public class Ship : MonoBehaviour {
         {
             rotation = -max_rotation;
         }
+        //Debug.Log("Steer, rotation: " + rotation);
     }
 
     private void Move()

@@ -16,6 +16,7 @@ public class IceCube : CarriableObject
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidBody = GetComponent<Rigidbody2D>();
         InvokeRepeating("DecreaseIceLevel", 1.0f, 0.1f);
+        activationMode = ActivationMode.DISCRETE;
     }
 
     //Used to regenerate player stamina
@@ -58,10 +59,8 @@ public class IceCube : CarriableObject
 
     public override float Activate(PlayerManager playerManager)  // Skicka med ett mäniskoobjekt. 
     {
-        Debug.Log("IceCube Activate");
         if (playerManager.carryManager.IsCarrying())
         {
-            Debug.Log("IceCube is Carrying");
             if (playerManager.carryManager.DropMe(this))
             {
                 return 1;
@@ -75,7 +74,6 @@ public class IceCube : CarriableObject
        //Check if the carrymanager could pick me up...
         if (playerManager.carryManager.PickMeUp(this))
         {
-            Debug.Log("Was picked up.");
             return 1;
         }
         else

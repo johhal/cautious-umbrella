@@ -8,6 +8,8 @@ public class SteeringWheel : ActivableObject  {
 
     public float labour = 1;
 
+    public float degrees_per_second = 15;
+
     public SpriteRenderer spriteRenderer;
     public Rigidbody2D rigidBody;
 
@@ -31,9 +33,9 @@ public class SteeringWheel : ActivableObject  {
         }
         if (playerManager.playerStatsManager.Current_Stamina >= labour)
         {
-            playerManager.playerStatsManager.Current_Stamina -= labour;
-            ship.Steer(1 * playerManager.playerMovement.leftInputX);
-            rigidBody.MoveRotation(rigidBody.rotation - 5 * playerManager.playerMovement.leftInputX);
+            playerManager.playerStatsManager.Current_Stamina -= labour * Time.deltaTime;
+                       ship.Steer(degrees_per_second * playerManager.playerMovement.leftInputX * Time.deltaTime);
+            rigidBody.MoveRotation(rigidBody.rotation - (2 * degrees_per_second) * playerManager.playerMovement.leftInputX * Time.deltaTime);
             
         }
         return 0.1f;

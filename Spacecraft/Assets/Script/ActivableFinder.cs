@@ -99,33 +99,32 @@ public class ActivableFinder : MonoBehaviour {
     {
         if (active != null)
         {
-            if (isActiveCoroutineStarted != true)
+
+            //playerManager.playerMovement.MovementEnabled = true;
+
+            if (active.activationMode == ActivableObject.ActivationMode.CONTINOUS)
             {
-                StartCoroutine(ActiveCoRoutine());
+                if (playerManager.playerMovement.button_a_down)
+                {
+                    float delay;
+                    delay = active.Activate(playerManager);
+                    
+                    if (active.FreezePlayer)
+                        playerManager.playerMovement.MovementEnabled = false;
+                }
             }
-        }
-    }
 
-    public IEnumerator ActiveCoRoutine()
-    {
-        
-        isActiveCoroutineStarted = true;
-        if (active.FreezePlayer)
-        {
-            playerManager.playerMovement.MovementEnabled = false;
-        }
-
-        float delay;
-        while (playerManager.playerMovement.button_a)
-        {
-            if (active != null)
+            if (active.activationMode == ActivableObject.ActivationMode.DISCRETE)
             {
-                delay = active.Activate(playerManager);
-                yield return new WaitForSeconds(delay);
-            }            
+                if (playerManager.playerMovement.button_a_pressed)
+                {
+                    float delay;
+                    delay = active.Activate(playerManager);
+                    playerManager.playerMovement.MovementEnabled = true;
+                }
+            }
+
         }
-        isActiveCoroutineStarted = false;
-        playerManager.playerMovement.MovementEnabled = true;
     }
 
     ActivableObject getCloseActivable()

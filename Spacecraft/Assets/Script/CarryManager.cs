@@ -31,28 +31,23 @@ public class CarryManager : MonoBehaviour {
     //Drop the carriableObject if we are carrying it.
     public bool DropMe(CarriableObject carriedObject)
     {
-        Debug.Log("CarryManager DropMe");
         if (carriedObject == null)
         {
-            Debug.Log("CarryManager CarriedObject is null");
             return false;
         }
 
         if (IsCarrying())
         {
-            Debug.Log("CarryManager IsCarrying");
             if (currentObject == carriedObject)
             {
-                Debug.Log("CarryManager currentObjejct = carriedObjejct");
                 if (currentObject.drop())
-                {
-                    Debug.Log("CarryManager dropped.");
+                { 
                     currentObject = null;
                     return true;
                 }                
             }
         }
-        Debug.Log("CarryManager Failed and return false.");
+    
         return false;
     }
 

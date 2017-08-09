@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class IceBlock : ActivableObject {
     public int currentIceLevel;
-    public int recoveryRate;
+    public float recoveryRate;
     public float totalLabor;
-    public int labor;
+    public float labor;
     public float efficiency;
     public int cubeCost;
     public GameObject iceCube;
@@ -26,7 +26,7 @@ public class IceBlock : ActivableObject {
 	// Update is called once per frame
 	void Update ()
     {
-        currentIceLevel += recoveryRate;
+        currentIceLevel += (int) (recoveryRate * Time.deltaTime);
 	}
 
     public override bool FocusGained()
@@ -52,12 +52,12 @@ public class IceBlock : ActivableObject {
     public override float Activate(PlayerManager playerManager)  // Skicka med ett mäniskoobjekt. 
     {
         // Om player har stamina
-        if (playerManager.playerStatsManager.Current_Stamina > labor)
+        if (playerManager.playerStatsManager.Current_Stamina > labor * Time.deltaTime)
         {
             //Remove used stamina
-            playerManager.playerStatsManager.Current_Stamina -= labor;
+            playerManager.playerStatsManager.Current_Stamina -= labor * Time.deltaTime;
             // SKicka in labor in i isen. 
-            totalLabor += labor * efficiency;
+            totalLabor += labor * efficiency * Time.deltaTime;
 
             // Kontrollera om vi har nått max, isf skapa ny isbit, å ge till spelare. 
             if (totalLabor >  cubeCost)
