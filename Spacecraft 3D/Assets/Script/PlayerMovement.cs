@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
 	public float leftInputX = 0;
 	public int joystickNumber = 2;
 	public float rightTrigger = 0;
+    public float jumpThrust = 5.0f;
 
     private bool button_a_old = false;
     private bool button_b_old = false;
@@ -97,6 +98,11 @@ public class PlayerMovement : MonoBehaviour
 
         button_a_old = button_a_down;
         button_b_old = button_b_down;
+
+        if (button_b_pressed)
+        {
+            rigidbody.AddForce(transform.up * jumpThrust, ForceMode.Impulse);
+        }
         //characterController.Move (movementVector * Time.deltaTime);
 
     }

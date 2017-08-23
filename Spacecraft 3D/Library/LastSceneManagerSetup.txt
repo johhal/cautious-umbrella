@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/MainView.unity
+- path: Assets/AvatarConfiguration.unity
   isLoaded: 1
   isActive: 1

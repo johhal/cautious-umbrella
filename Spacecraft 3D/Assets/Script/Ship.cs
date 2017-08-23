@@ -29,6 +29,9 @@ public class Ship : MonoBehaviour {
     private double DegreeToRad =(2 * Mathf.PI) / 360;
     //Min rotation allowed before set to zero
     public double MinMovementValue = 0.01;
+
+    //Rigid body of the boat
+    public Rigidbody rigidBody;
        
     // Use this for initialization
     void Start () {
@@ -73,9 +76,14 @@ public class Ship : MonoBehaviour {
     public void Animate()
     {
         Vector3 rotationVector = transform.rotation.eulerAngles;
-        rotationVector.z = (float) direction;
+        rotationVector.y = (float) direction;
         transform.rotation = Quaternion.Euler(rotationVector);
         //gameObject.transform.rotation = new Quaternion(0,0, (float) (DegreeToRad * direction),0);
+        if (rigidBody != null)
+        {
+            Vector3 speed = new Vector3((float)current_speed, 0, 0);
+            rigidBody.MovePosition(rigidBody.position +  speed * Time.deltaTime);
+        }        
     }
 
     //Used to change the rotation of the rudder.
@@ -93,6 +101,7 @@ public class Ship : MonoBehaviour {
             rotation = -max_rotation;
         }
         //Debug.Log("Steer, rotation: " + rotation);
+        
     }
 
     private void Move()
