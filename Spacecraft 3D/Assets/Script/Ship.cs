@@ -64,7 +64,7 @@ public class Ship : MonoBehaviour {
         }
         else
         {
-            rotation -= rotation * rudder_drag * Time.deltaTime;
+            //rotation -= rotation * rudder_drag * Time.deltaTime;
         }
         //Calculate new position
         Move();
@@ -77,12 +77,15 @@ public class Ship : MonoBehaviour {
     {
         Vector3 rotationVector = transform.rotation.eulerAngles;
         rotationVector.y = (float) direction;
-        transform.rotation = Quaternion.Euler(rotationVector);
+        //transform.rotation = Quaternion.Euler(rotationVector);
+        rigidBody.MoveRotation(Quaternion.Euler(rotationVector));
+
         //gameObject.transform.rotation = new Quaternion(0,0, (float) (DegreeToRad * direction),0);
         if (rigidBody != null)
         {
-            Vector3 speed = new Vector3((float)current_speed, 0, 0);
-            rigidBody.MovePosition(rigidBody.position +  speed * Time.deltaTime);
+            Vector3 speed = new Vector3(transform.forward.normalized.x * (float)current_speed, 0, transform.forward.normalized.z * (float)current_speed);//(float)current_speed, 0, 0);
+            //rigidBody.MovePosition(rigidBody.position +  speed * Time.deltaTime);
+            rigidBody.AddForce(speed);
         }        
     }
 

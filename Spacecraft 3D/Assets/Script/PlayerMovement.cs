@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public bool button_b_pressed = false;
     public bool moving;
 
+    public Camera mainCamera;
 
     void Start ()
 	{
@@ -37,6 +38,15 @@ public class PlayerMovement : MonoBehaviour
 
 	void FixedUpdate ()
 	{
+        speed = Vector3.zero;
+        //Get forward from camera
+        Vector3 forward = mainCamera.transform.TransformDirection(Vector3.forward);
+        //Remove upward trajectory
+        forward.y = 0f;
+        //Normalize vector
+        forward = forward.normalized;
+        Vector3 right = new Vector3(forward.z, 0.0f, -forward.x);
+
         moving = false;
 		string joystickString = joystickNumber.ToString ();
         //Get input
@@ -54,13 +64,19 @@ public class PlayerMovement : MonoBehaviour
             if ((leftInputX != 0) || (leftInputY != 0))
             {
                 //Move player
-                speed = new Vector3(leftInputX * currentSpeed, 0, -leftInputY * currentSpeed);
+                speed = (right * leftInputX + forward * (-leftInputY)) * currentSpeed;//new Vector3(leftInputX * currentSpeed * right, 0, -leftInputY * currentSpeed * forward.x);
                 rigidbody.MovePosition(rigidbody.position + speed * Time.deltaTime);
-                //Rotate player
-                rotation = (180 / Mathf.PI) * Mathf.Atan2(-leftInputX, leftInputY);
+                
+                //Rotate playera
+                rotation = (180 / Mathf.PI) * Mathf.Atan2(leftInputX, -leftInputY);
+
                 //Adjustment for rotation and movement... :(
-                rotation += 90;
-                transform.localEulerAngles = new Vector3(0, rotation, 0);
+                //rotation += 90;
+                //transform.localEulerAngles = new Vector3(0, rotation, 0);
+                //Vector3 rotationVector = Vector3.up; //transform.rotation.eulerAngles;
+                //rotationVector.y = (float)rotation;
+
+                //rigidbody.MoveRotation(Quaternion.Euler(rotationVector));
                 if (speed != Vector3.zero )
                 {
                     moving = true;
